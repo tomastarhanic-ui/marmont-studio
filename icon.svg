@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MarMont Studio">
+  <rect width="512" height="512" rx="112" fill="#1b2929"/>
+  <rect x="49" y="49" width="414" height="414" rx="88" fill="#243b38"/>
+  <path d="M125 369V147h57l74 98 74-98h57v222h-62V242l-69 90-69-90v127z" fill="#e8b58f"/>
+  <path d="M126 397h260" stroke="#d29468" stroke-width="13" stroke-linecap="round"/>
+</svg>
