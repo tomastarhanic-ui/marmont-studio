@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#1b2728">
-  <meta name="description" content="MarMont Studio – príprava fotografií a príspevkov priamo v mobile.">
+  <meta name="description" content="MarMont Studio – príprava fotografií a príspevkov na mobile aj Windows PC.">
+  <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2929'/%3E%3Ctext x='32' y='46' text-anchor='middle' fill='white' font-size='45' font-family='sans-serif'%3EM%3C/text%3E%3C/svg%3E">
-  <title>MarMont Studio – mobilný asistent</title>
+  <title>MarMont Studio – mobil a PC</title>
   <style>
     :root { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color:#1b2929; background:#f6f5f0; --ink:#1b2929; --muted:#667370; --panel:#fff; --line:#e2e5df; --accent:#ad633d; --accent2:#f8eae0; --good:#1f7561; }
     *{box-sizing:border-box} body{margin:0; min-height:100vh; padding-bottom:calc(90px + env(safe-area-inset-bottom))} button,input,select,textarea{font:inherit} button{cursor:pointer} button:disabled{cursor:not-allowed;opacity:.48} a{color:var(--accent)}
@@ -24,10 +25,43 @@
     .toast{position:fixed;left:50%;bottom:calc(85px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#202f2e;color:white;max-width:min(90vw,440px);min-width:220px;text-align:center;box-shadow:0 8px 24px #0003;padding:13px;border-radius:11px;font-size:13px;z-index:22;display:none}.toast.show{display:block}
     .hidden{display:none!important} details{border:1px solid var(--line);padding:12px;border-radius:12px;margin-top:10px;background:#fff;font-size:13px;line-height:1.5}summary{font-weight:750;cursor:pointer}.small-note{font-size:12px;color:var(--muted);line-height:1.55}.row-between{display:flex;justify-content:space-between;align-items:center;gap:8px}.switch{display:flex;gap:8px;align-items:center;font-size:12px;font-weight:650}.switch input{accent-color:#ae6d4b}
     @media(min-width:680px){.photos{grid-template-columns:repeat(5,minmax(0,1fr))}.photo img{height:140px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:15px}.two-col>.card{height:fit-content}}
+
+    /* Desktop mode: rovnaká aplikácia, pohodlnejšie rozloženie pre Windows. */
+    @media (min-width:1050px) {
+      body{padding-bottom:0}
+      .top{padding:21px 34px 21px 248px}
+      .top-inner{max-width:1380px;margin:0;gap:16px}
+      .mark{width:54px;height:54px;font-size:31px}
+      .top h1{font-size:27px}.top p{font-size:13px}
+      .shell{max-width:1440px;margin:0 0 0 220px;padding:32px clamp(24px,3vw,54px) 55px}
+      .bottom{top:0;right:auto;bottom:0;left:0;width:220px;height:100vh;display:flex;flex-direction:column;justify-content:flex-start;gap:9px;padding:126px 14px 20px;background:#1b2929;border:0;border-right:1px solid #36514c;box-shadow:none}
+      .bottom button{width:100%;min-width:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding:15px 13px;color:#c7d5cf;font-size:14px;border-radius:12px}
+      .bottom button:hover{background:#324b45;color:white}
+      .bottom button.active{background:#d2946829;color:#ffdbb9}
+      .bottom svg{width:23px;height:23px}
+      .welcome h2{font-size:27px}
+      #tab-studio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:18px}
+      #tab-studio>.welcome{grid-column:1/-1;margin-bottom:0}
+      #tab-studio>.card{margin:0;padding:22px 24px;border-radius:19px}
+      .card h3{font-size:19px}.card .intro{font-size:14px}
+      label{font-size:13px}
+      .photos{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .photo img{height:130px}
+      textarea{min-height:120px}
+      #postText{min-height:200px}
+      .uplabel{min-height:126px}
+      .btn:hover:not(:disabled){filter:brightness(1.06)}
+      #tab-archive>.card,#tab-help>.card{max-width:900px}
+      .toast{bottom:24px;left:calc(50% + 110px)}
+    }
+    @media (min-width:1650px) {
+      .photos{grid-template-columns:repeat(5,minmax(0,1fr))}
+      .photo img{height:155px}
+    }
   </style>
 </head>
 <body>
-<header class="top"><div class="top-inner"><div class="mark">M</div><div><h1>MarMont Studio</h1><p>Mobilný marketingový asistent · verzia 1.0</p></div></div></header>
+<header class="top"><div class="top-inner"><div class="mark">M</div><div><h1>MarMont Studio</h1><p>Marketingový asistent · mobil + PC · verzia 1.1</p></div></div></header>
 <main class="shell">
   <section id="tab-studio">
     <div class="welcome"><div><h2>Nová realizácia</h2><p>Od fotky po hotový príspevok.</p></div><div id="badge" class="tag">Rozpracované</div></div>
@@ -38,9 +72,9 @@
       <div class="field"><label for="details">Čo je na realizácii zaujímavé?</label><textarea id="details" placeholder="Napr. prechodové dvere do technickej miestnosti, dubová dyha, skryté úchyty..."></textarea><p class="hint">Agent nebude vymýšľať materiály ani vlastnosti, ktoré mu nepovieš.</p></div>
     </div>
     <div class="card">
-      <div class="section-label"><span class="num">2</span><h3>Fotografie z telefónu</h3></div><p class="intro">Fotky ostávajú v tvojom telefóne. Vyber ich z galérie alebo urob novú.</p>
+      <div class="section-label"><span class="num">2</span><h3>Fotografie z mobilu alebo PC</h3></div><p class="intro">Fotky zostávajú v zariadení, kde ich pridáš. Vyber ich z galérie telefónu alebo priečinka na PC.</p>
       <div class="upload-actions">
-        <label class="uplabel"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg>Vybrať z galérie<input type="file" id="gallery" accept="image/*" multiple></label>
+        <label class="uplabel"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg>Vybrať fotografie<input type="file" id="gallery" accept="image/*" multiple></label>
         <label class="uplabel"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 7h4l2-3h4l2 3h4v12H4z"/><circle cx="12" cy="13" r="4"/></svg>Odfotiť<input type="file" id="camera" accept="image/*" capture="environment"></label>
       </div>
       <p id="photoCount" class="hint">Zatiaľ bez fotografií. Limit: 12 na realizáciu.</p>
@@ -61,22 +95,22 @@
       <div class="row-between" style="margin-bottom:12px"><span id="approval" class="status draft">Čaká na schválenie</span><span class="small-note">Nikdy nezverejňujeme automaticky</span></div>
       <div class="buttons" style="margin-bottom:9px"><button class="btn light" id="saveBtn">Uložiť realizáciu</button><button class="btn warm" id="approveBtn">✓ Schváliť</button></div>
       <button class="btn" id="exportBtn">↓ Stiahnuť balík fotiek a textu (ZIP)</button>
-      <p class="hint">Export pripraví obrázky pre Instagram (1080 × 1350), Facebook (1080 × 1350) a web (1600 × 900) + text príspevku. Spracovanie prebieha v mobile.</p>
+      <p class="hint">Export pripraví obrázky pre Instagram (1080 × 1350), Facebook (1080 × 1350) a web (1600 × 900) + text príspevku. Spracovanie prebieha v tomto zariadení.</p>
       <button class="btn ghost small" style="margin-top:12px" id="newBtn">+ Začať novú realizáciu</button>
     </div>
   </section>
   <section id="tab-archive" class="hidden">
     <div class="welcome"><div><h2>Moje realizácie</h2><p>Rozpracované a schválené projekty.</p></div></div>
-    <div class="card"><div class="row-between"><h3>Lokálny archív</h3><button class="btn light small" style="width:auto" id="backStudio">+ Nová</button></div><p class="intro">Uložené len v tomto prehliadači. Dáta sa nesynchronizujú medzi telefónmi.</p><div id="archiveItems"></div></div>
+    <div class="card"><div class="row-between"><h3>Lokálny archív</h3><button class="btn light small" style="width:auto" id="backStudio">+ Nová</button></div><p class="intro">Uložené iba v tomto prehliadači. Dáta sa zatiaľ nesynchronizujú medzi mobilom a počítačom.</p><div id="archiveItems"></div></div>
   </section>
   <section id="tab-help" class="hidden">
-    <div class="welcome"><div><h2>Ako to funguje</h2><p>Všetko pripravené na používanie v telefóne.</p></div></div>
+    <div class="welcome"><div><h2>Ako to funguje</h2><p>Rovnaké funkcie na mobile aj počítači.</p></div></div>
     <div class="card"><h3>Rýchly postup</h3><p class="small-note">1. Pridaj názov a detaily realizácie.<br>2. Vyber fotografie z galérie alebo fotografuj.<br>3. Nechaj pripraviť text a uprav si ho.<br>4. Schváľ realizáciu.<br>5. Stiahni ZIP balík a nahraj príspevok na svoju sieť.</p>
-      <details><summary>Uloží sa obsah do cloudu?</summary><p>Nie. Verzia 1.0 neposiela fotografie na server. Spracovanie a archív fungujú vo vašom telefóne, v úložisku prehliadača (IndexedDB). Pri vymazaní dát prehliadača môžu projekty zmiznúť. Zálohujte ich exportom.</p></details>
+      <details><summary>Uloží sa obsah do cloudu?</summary><p>Nie. Aplikácia neposiela fotografie na server. Spracovanie a archív fungujú v zariadení, v úložisku prehliadača (IndexedDB). Mobil a počítač majú každý vlastný archív a automaticky sa nesynchronizujú. Pri vymazaní dát prehliadača môžu projekty zmiznúť. Zálohujte ich exportom.</p></details>
       <details><summary>Je to naozaj umelá inteligencia?</summary><p>Generovanie základného textu v tejto verzii používa šablóny, nie jazykový AI model. Tlačidlo „Kopírovať zadanie pre ChatGPT“ pripraví prompt, ktorý vložíte do ChatGPT. Priamy AI chat v aplikácii vyžaduje ďalšie prepojenie.</p></details>
-      <details><summary>Ako nainštalovať na úvodnú obrazovku?</summary><p>Po zverejnení aplikácie na HTTPS adrese ju otvorte v Chrome alebo Samsung Internet a z ponuky prehliadača vyberte „Pridať na plochu“. V tejto jednoduchej jednosúborovej verzii ide o odkaz na ploche; plná offline inštalácia sa pridá neskôr.</p></details>
+      <details><summary>Ako pridať aplikáciu na plochu?</summary><p>Na počítači s Windows otvorte aplikáciu v Microsoft Edge, kliknite na tri bodky, potom Aplikácie → Nainštalovať túto lokalitu ako aplikáciu. V Chrome vyberte Inštalovať stránku ako aplikáciu. Na telefóne použite v prehliadači možnosť Pridať na plochu. Po prvom načítaní môže byť rozhranie dostupné aj bez internetu, nie však všetky funkcie telefónu alebo prehliadača.</p></details>
       <details><summary>Aké sú obmedzenia?</summary><p>Maximum je 12 fotografií na realizáciu. Niektoré formáty HEIC/HEIF nemusí každý prehliadač vedieť načítať. JPEG, PNG a WebP sú vhodné. Export veľkého balíka môže trvať a spotrebovať pamäť telefónu.</p></details>
-      <p class="small-note" style="margin-top:15px">MarMont Studio 1.0 · lokálne spracovanie fotografií · žiadne automatické odosielanie na Meta.</p></div>
+      <p class="small-note" style="margin-top:15px">MarMont Studio 1.1 · mobil + Windows · fotografie zostávajú lokálne · žiadne automatické odosielanie na Meta.</p></div>
   </section>
 </main>
 <nav class="bottom" aria-label="Hlavná navigácia"><button data-tab="studio" class="active"><svg viewBox="0 0 24 24"><path d="M12 20h9M12 4h9M4 12h17M4 4h3M4 20h3"/></svg>Pripraviť</button><button data-tab="archive"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18m-12 5h6"/></svg>Realizácie</button><button data-tab="help"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4m0 4h.01"/></svg>Návod</button></nav>
@@ -143,6 +177,7 @@ async function init(){db=await openStore();if(ephemeral)toast('Prehliadač neumo
  $('exportBtn').onclick=exportProject;$('newBtn').onclick=()=>{if(active.title||active.photos.length||active.text){if(!confirm('Začať novú realizáciu? Aktuálny stav najprv ulož, ak ho chceš zachovať.'))return}resetProject()};$('backStudio').onclick=()=>resetProject();
 }
 init();
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); }); }
 </script>
 </body>
 </html>
