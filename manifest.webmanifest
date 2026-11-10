@@ -1,0 +1,20 @@
+{
+  "name": "MarMont Studio – marketingový asistent",
+  "short_name": "MarMont Studio",
+  "id": "./",
+  "description": "Príprava fotografií a príspevkov pre MarMont Nábytok na mobile a PC.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f0",
+  "theme_color": "#1b2929",
+  "lang": "sk",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
